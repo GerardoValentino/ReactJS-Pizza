@@ -57,6 +57,7 @@ function App() {
             <Header></Header>
             <Menu></Menu>
             <Footer></Footer>
+            <Copyright></Copyright>
         </div>
     );
 }
@@ -109,12 +110,14 @@ function Pizza({ pizzaObj }) {
   if(pizzaObj.soldOut) return null;
 
   return (
-      <li className='pizza'>
+      <li className={`pizza ${pizzaObj.soldOut ? 'sold-out' : ''}`}>
+
           <img src={pizzaObj.photoName} alt={pizzaObj.name}/>
           <div>
             <h3>{pizzaObj.name}</h3>
             <p>{pizzaObj.ingredients}</p>
-            <span>{pizzaObj.price + 3}</span>
+            
+            <span>${pizzaObj.soldOut ? "Sold Out" : pizzaObj.price + "USD"}</span>
           </div>
       </li>
   );
@@ -142,12 +145,18 @@ function Footer() {
   );
 }
 
+function Copyright() {
+  return (
+    <p className='copyright'>&copy; All rights reserved. Gerardo Valentino Rosales Ramos</p>
+  );
+}
+
 function Order({ closeHour, openHour }) {
   return (
     <div className='order'>
       <p>We're open from {openHour}:00 hrs until {closeHour}:00 hrs. Come visit us or order online</p>
       <button className='btn'>Order Here!</button>
-    </div>
+    </div>  
   );
 }
 
